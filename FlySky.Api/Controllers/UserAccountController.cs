@@ -21,8 +21,19 @@ namespace FlySky.Api.Controllers
             return _userAccountService.AllUsers();
         }
         [HttpPost]
-        public bool CreateUser(Useracount useracount)
+        public bool CreateUser([FromForm] Useracount useracount, [FromForm] IFormFile image)
         {
+            if (image != null)
+            {
+                var fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                string filePath = Path.Combine("Images", fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+
+                useracount.Image = fileName;
+            }
             return _userAccountService.CreateUser(useracount);
         }
         [HttpPut]

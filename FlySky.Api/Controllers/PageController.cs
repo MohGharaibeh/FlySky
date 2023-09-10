@@ -21,8 +21,19 @@ namespace FlySky.Api.Controllers
             return pageService.AllPages();
         }
         [HttpPut]
-        public bool UpdatePage(Page page)
+        public bool UpdatePage([FromForm] Page page, [FromForm] IFormFile image)
         {
+            if (image != null)
+            {
+                var fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                string filePath = Path.Combine("Images", fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+
+                page.Image = fileName;
+            }
             return pageService.UpdatePage(page);
         }
     }
