@@ -22,7 +22,7 @@ namespace FlySky.Infra.Repository
         {
             var p = new DynamicParameters();
             p.Add("eml", contact.Email, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("phn", contact.Phone, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("phn", contact.Phone, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("msg", contact.Message, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("img", contact.Image, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("sbjct", contact.Subject, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -34,7 +34,7 @@ namespace FlySky.Infra.Repository
             var p = new DynamicParameters();
             p.Add("cID", contact.Contactid, dbType: DbType.Int64, direction: ParameterDirection.Input);
             p.Add("eml", contact.Email, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("phn", contact.Phone, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("phn", contact.Phone, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("msg", contact.Message, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("img", contact.Image, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("sbjct", contact.Subject, dbType: DbType.String, direction: ParameterDirection.Input);
