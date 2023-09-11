@@ -14,5 +14,6 @@ namespace FlySky.Core.Repository
         public bool UpdateUser(Useracount useracount);
         public bool DeleteUser(int id);
         public Useracount UserById(int id);
+        public Useracount Login(Useracount useracount);
     }
 }

@@ -70,5 +70,14 @@ namespace FlySky.Infra.Repository
                 commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
+        public Useracount Login(Useracount useracount)
+        {
+            var p = new DynamicParameters();
+            p.Add("uemail", useracount.Email, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("pas", useracount.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+            IEnumerable<Useracount> result = _dbContext.Connection.Query<Useracount>
+                ("Authentications.Login", p, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
     }
 }

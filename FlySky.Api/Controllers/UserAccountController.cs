@@ -2,6 +2,7 @@
 using FlySky.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlySky.Api.Controllers
 {
@@ -52,6 +53,25 @@ namespace FlySky.Api.Controllers
         public Useracount UserById(int id)
         {
             return _userAccountService.UserById(id);
+        }
+        [Route("login")]
+        [HttpPost]
+        public IActionResult Login([FromBody] Useracount useracount)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Handle validation errors
+                return BadRequest(ModelState);
+            }
+            var tok = _userAccountService.Login(useracount);
+            if (tok == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(tok);
+            }
         }
     }
 }
