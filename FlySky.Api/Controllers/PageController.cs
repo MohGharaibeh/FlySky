@@ -25,6 +25,7 @@ namespace FlySky.Api.Controllers
         {
             if (image != null)
             {
+
                 var fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
                 string filePath = Path.Combine("Images", fileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))

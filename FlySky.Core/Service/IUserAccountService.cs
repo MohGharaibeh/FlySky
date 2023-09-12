@@ -14,5 +14,6 @@ namespace FlySky.Core.Service
         public bool UpdateUser(Useracount useracount);
         public bool DeleteUser(int id);
         public Useracount UserById(int id);
+        public string Login(Useracount useracount);
     }
 }

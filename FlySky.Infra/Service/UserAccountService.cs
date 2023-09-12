@@ -1,9 +1,12 @@
 ﻿using FlySky.Core.Data;
 using FlySky.Core.Repository;
 using FlySky.Core.Service;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +40,30 @@ namespace FlySky.Infra.Service
         public Useracount UserById(int id)
         {
             return _userAccountRepository.UserById(id);
+        }
+
+        public string Login(Useracount useracount)
+        {
+            var result = _userAccountRepository.Login(useracount);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                var Skey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsSpecialTeamYU@200000000000"));
+                var cred = new SigningCredentials(Skey, SecurityAlgorithms.HmacSha256);
+                var clims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, result.Email.ToString()),
+                new Claim(ClaimTypes.Role, result.Roleid.ToString())
+                };
+
+                var option = new JwtSecurityToken(claims: clims, expires: DateTime.Now.AddHours(1), signingCredentials: cred);
+
+                var token = new JwtSecurityTokenHandler().WriteToken(option);
+                return token;
+            }
         }
     }
 }
