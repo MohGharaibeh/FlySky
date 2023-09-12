@@ -32,6 +32,7 @@ namespace FlySky.Infra.Repository
             p.Add("numTicket", reservedflight.Numberofticket, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("userid", reservedflight.Useracountid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("fid", reservedflight.Flightid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("resdate", reservedflight.Reserveddate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Execute("RESERVEDFLIGHTpackage.createRESERVEDFLIGHT", p, commandType: CommandType.StoredProcedure);
             return result < 0;
 
@@ -43,6 +44,8 @@ namespace FlySky.Infra.Repository
             p.Add("numTicket", reservedflight.Numberofticket, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("userid", reservedflight.Useracountid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("fid", reservedflight.Flightid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("resdate", reservedflight.Reserveddate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+
             var result = _dbContext.Connection.Execute("RESERVEDFLIGHTpackage.updateRESERVEDFLIGHT", p, commandType: CommandType.StoredProcedure);
             return result < 0;
         }
