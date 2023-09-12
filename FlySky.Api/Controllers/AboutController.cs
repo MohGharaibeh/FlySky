@@ -11,6 +11,7 @@ namespace FlySky.Api.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _service;
+        // abount 
 
         public AboutController(IAboutService service)
         {
@@ -22,7 +23,7 @@ namespace FlySky.Api.Controllers
         {
             _service.UpdateAbout(about);
         }
-        
+
         [HttpGet]
         public List<About> GetAllAbout()
         {
