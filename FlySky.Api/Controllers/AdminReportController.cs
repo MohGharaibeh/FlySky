@@ -16,7 +16,7 @@ namespace FlySky.Api.Controllers
         {
             _adminReportService = adminReportService;
         }
-
+        // comment
         [HttpGet]
         public List<AdminReport> FullReport()
         {
