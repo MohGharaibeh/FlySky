@@ -16,20 +16,25 @@ namespace FlySky.Api.Controllers
             this.contactService = contactService;
         }
         [HttpPost]
-        public void CreateContact([FromForm] Contact contact, [FromForm] IFormFile image)
+        public void CreateContact([FromBody] Contact contact)
         {
-            if (image != null)
-            {
-                var fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                string filePath = Path.Combine("Images", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    image.CopyTo(stream);
-                }
-
-                contact.Image = fileName;
-            }
+           
             contactService.CreateContact(contact);
+        }
+        [Route("uploadImage")]
+        [HttpPost]
+        public Useracount UploadImage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var fullPath = Path.Combine("Images", fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Useracount user = new Useracount();
+            user.Image = fileName;
+            return user;
         }
         [HttpPut]
         public void UpdateContact(Contact contact)

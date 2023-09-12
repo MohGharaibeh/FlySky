@@ -79,5 +79,21 @@ namespace FlySky.Infra.Repository
                 ("Authentications.Login", p, commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
+        public List<Flight> SearchByDate(Flight flight)
+        {
+            var p = new DynamicParameters();
+            p.Add("depDate", flight.Departuredate, dbType: DbType.Date, direction: ParameterDirection.Input);
+            p.Add("arrDate", flight.Arrivaldate, dbType: DbType.Date, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Flight>("userSearch_package.searchDepArr", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<Flight> SearchByCountry(Flight flight)
+        {
+            var p = new DynamicParameters();
+            p.Add("fcounty", flight.Fromcountry, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("tcountry", flight.Tocountry, dbType: DbType.String, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Flight>("userSearch_package.searchFromToCountry", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

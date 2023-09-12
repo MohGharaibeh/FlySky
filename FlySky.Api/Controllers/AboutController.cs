@@ -23,6 +23,21 @@ namespace FlySky.Api.Controllers
         {
             _service.UpdateAbout(about);
         }
+        [Route("uploadImage")]
+        [HttpPost]
+        public Useracount UploadImage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var fullPath = Path.Combine("Images", fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Useracount user = new Useracount();
+            user.Image = fileName;
+            return user;
+        }
 
         [HttpGet]
         public List<About> GetAllAbout()

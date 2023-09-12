@@ -65,5 +65,13 @@ namespace FlySky.Infra.Service
                 return token;
             }
         }
+        public List<Flight> SearchByDate(Flight flight)
+        {
+            return _userAccountRepository.SearchByDate(flight);
+        }
+        public List<Flight> SearchByCountry(Flight flight)
+        {
+            return _userAccountRepository.SearchByCountry(flight);
+        }
     }
 }

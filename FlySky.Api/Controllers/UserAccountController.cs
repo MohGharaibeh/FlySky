@@ -22,20 +22,24 @@ namespace FlySky.Api.Controllers
             return _userAccountService.AllUsers();
         }
         [HttpPost]
-        public bool CreateUser([FromForm] Useracount useracount, [FromForm] IFormFile image)
+        public bool CreateUser([FromBody] Useracount useracount)
         {
-            if (image != null)
-            {
-                var fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                string filePath = Path.Combine("Images", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    image.CopyTo(stream);
-                }
-
-                useracount.Image = fileName;
-            }
             return _userAccountService.CreateUser(useracount);
+        }
+        [Route("uploadImage")]
+        [HttpPost]
+        public Useracount UploadImage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var fullPath = Path.Combine("Images", fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Useracount user = new Useracount();
+            user.Image = fileName;
+            return user;
         }
         [HttpPut]
         public bool UpdateUser(Useracount useracount)
@@ -72,6 +76,18 @@ namespace FlySky.Api.Controllers
             {
                 return Ok(tok);
             }
+        }
+        [HttpPost]
+        [Route("ByDate")]
+        public List<Flight> SearchByDate([FromBody] Flight flight)
+        {
+            return _userAccountService.SearchByDate(flight);
+        }
+        [HttpPost]
+        [Route("ByCountry")]
+        public List<Flight> SearchByCountry([FromBody] Flight flight)
+        {
+            return _userAccountService.SearchByCountry(flight);
         }
     }
 }

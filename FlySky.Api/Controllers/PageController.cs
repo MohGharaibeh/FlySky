@@ -21,21 +21,24 @@ namespace FlySky.Api.Controllers
             return pageService.AllPages();
         }
         [HttpPut]
-        public bool UpdatePage([FromForm] Page page, [FromForm] IFormFile image)
+        public bool UpdatePage([FromBody] Page page)
         {
-            if (image != null)
-            {
-
-                var fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                string filePath = Path.Combine("Images", fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    image.CopyTo(stream);
-                }
-
-                page.Image = fileName;
-            }
             return pageService.UpdatePage(page);
+        }
+        [Route("uploadImage")]
+        [HttpPost]
+        public Useracount UploadImage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var fullPath = Path.Combine("Images", fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Useracount user = new Useracount();
+            user.Image = fileName;
+            return user;
         }
     }
 }

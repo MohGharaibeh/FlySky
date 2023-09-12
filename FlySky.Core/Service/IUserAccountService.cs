@@ -15,5 +15,7 @@ namespace FlySky.Core.Service
         public bool DeleteUser(int id);
         public Useracount UserById(int id);
         public string Login(Useracount useracount);
+        public List<Flight> SearchByDate(Flight flight);
+        public List<Flight> SearchByCountry(Flight flight);
     }
 }
