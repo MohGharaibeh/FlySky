@@ -12,5 +12,6 @@ namespace FlySky.Core.Service
         public List<Testimonial> AllTestimonial();
         public bool CreateTestimonial(Testimonial testimonial);
         public bool DeleteTestimonial(int id);
+        public void UpdateTestimonial(Testimonial test);
     }
 }

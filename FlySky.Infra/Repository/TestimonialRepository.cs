@@ -45,5 +45,12 @@ namespace FlySky.Infra.Repository
                 p, commandType: CommandType.StoredProcedure);
             return result < 0;
         }
+
+        public void UpdateTestimonial(Testimonial test)
+        {
+            var p = new DynamicParameters();
+            p.Add("tid",test.Testimonialid, dbType: DbType.Int32, direction:ParameterDirection.Input);
+            var result = _dbContext.Connection.Execute("Testimonial_Package.UpdateState",p, commandType: CommandType.StoredProcedure);
+        }
     }
 }

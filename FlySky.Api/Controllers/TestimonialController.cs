@@ -31,5 +31,11 @@ namespace FlySky.Api.Controllers
         {
             return _testimonial.DeleteTestimonial(id);
         }
+        [HttpPut]
+        [Route("updateTest")]
+        public void UpdateTestimonial(Testimonial test)
+        {
+            _testimonial.UpdateTestimonial(test);
+        }
     }
 }

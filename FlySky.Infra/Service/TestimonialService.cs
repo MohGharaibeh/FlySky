@@ -29,5 +29,9 @@ namespace FlySky.Infra.Service
         {
             return _repository.DeleteTestimonial(id);
         }
+        public void UpdateTestimonial(Testimonial test)
+        {
+            _repository.UpdateTestimonial(test);
+        }
     }
 }
