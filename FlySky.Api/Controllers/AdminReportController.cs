@@ -24,7 +24,7 @@ namespace FlySky.Api.Controllers
         }
         [HttpPost]
         [Route("searchReport")]
-        public List<AdminReport> SearchDate(AdminReport admin)
+        public List<AdminReport> SearchDate(AdminReport admin)  //commnet
         {
            return _adminReportService.SearchDate(admin);
         }
