@@ -28,5 +28,12 @@ namespace FlySky.Api.Controllers
         {
            return _adminReportService.SearchDate(admin);
         }
+
+        [HttpPost]
+        [Route("searchFlight")]
+        public List<Flight> SearchDateFlight(Flight admin)  //commnet
+        {
+            return _adminReportService.SearchDateFlight(admin);
+        }
     }
 }

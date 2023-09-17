@@ -28,5 +28,10 @@ namespace FlySky.Infra.Service
         {
             return _adminReportRepository.SearchDate(admin);
         }
+
+        public List<Flight> SearchDateFlight(Flight admin)
+        {
+            return _adminReportRepository.SearchDateFlight(admin);
+        }
     }
 }
