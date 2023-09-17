@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace FlySky.Api.Controllers
             _testimonial = testimonial;
         }
         [HttpGet]
-        public List<Testimonial> AllTestimonial()
+        public List<TestimonialAndUser> AllTestimonial()
         {
             return _testimonial.AllTestimonial();
         }

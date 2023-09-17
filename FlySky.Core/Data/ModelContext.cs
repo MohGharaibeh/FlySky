@@ -16,6 +16,7 @@ namespace FlySky.Core.Data
         {
         }
 
+        public virtual DbSet<About> Abouts { get; set; } = null!;
         public virtual DbSet<Airport> Airports { get; set; } = null!;
         public virtual DbSet<Contact> Contacts { get; set; } = null!;
         public virtual DbSet<Flight> Flights { get; set; } = null!;
@@ -31,14 +32,59 @@ namespace FlySky.Core.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseOracle("Data Source=DESKTOP-P1MURAO:1522/xe;User Id=c##finalproject;Password=123;");
+                optionsBuilder.UseOracle("USER ID=C##final;PASSWORD=123;DATA SOURCE=DESKTOP-V7VKI3K:1521/xe");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("C##FINALPROJECT")
+            modelBuilder.HasDefaultSchema("C##FINAL")
                 .UseCollation("USING_NLS_COMP");
+
+            modelBuilder.Entity<About>(entity =>
+            {
+                entity.ToTable("ABOUT");
+
+                entity.Property(e => e.Aboutid)
+                    .HasColumnType("NUMBER(38)")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ABOUTID");
+
+                entity.Property(e => e.Descriptions)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("DESCRIPTIONS");
+
+                entity.Property(e => e.Image)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("IMAGE");
+
+                entity.Property(e => e.Text1)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("TEXT1");
+
+                entity.Property(e => e.Text2)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("TEXT2");
+
+                entity.Property(e => e.Text3)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("TEXT3");
+
+                entity.Property(e => e.Text4)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("TEXT4");
+
+                entity.Property(e => e.Text5)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("TEXT5");
+            });
 
             modelBuilder.Entity<Airport>(entity =>
             {
@@ -178,7 +224,7 @@ namespace FlySky.Core.Data
             modelBuilder.Entity<Page>(entity =>
             {
                 entity.HasKey(e => e.Pagesid)
-                    .HasName("SYS_C008367");
+                    .HasName("SYS_C008406");
 
                 entity.ToTable("PAGES");
 
@@ -249,6 +295,10 @@ namespace FlySky.Core.Data
                 entity.Property(e => e.Numberofticket)
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("NUMBEROFTICKET");
+
+                entity.Property(e => e.Reserveddate)
+                    .HasColumnType("DATE")
+                    .HasColumnName("RESERVEDDATE");
 
                 entity.Property(e => e.Useracountid)
                     .HasColumnType("NUMBER(38)")

@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Repository;
 using FlySky.Core.Service;
 using System;
@@ -17,7 +18,7 @@ namespace FlySky.Infra.Service
         {
             _repository = repository;
         }
-        public List<Testimonial> AllTestimonial()
+        public List<TestimonialAndUser> AllTestimonial()
         {
             return _repository.AllTestimonial();
         }

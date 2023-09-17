@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace FlySky.Core.Service
 {
     public interface ITestimonialService
     {
-        public List<Testimonial> AllTestimonial();
+        public List<TestimonialAndUser> AllTestimonial();
         public bool CreateTestimonial(Testimonial testimonial);
         public bool DeleteTestimonial(int id);
         public void UpdateTestimonial(Testimonial test);

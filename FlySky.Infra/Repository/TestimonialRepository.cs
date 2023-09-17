@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlySky.Core.DTO;
 
 namespace FlySky.Infra.Repository
 {
@@ -20,9 +21,9 @@ namespace FlySky.Infra.Repository
             _dbContext = dbContext;
         }
 
-        public List<Testimonial> AllTestimonial()
+        public List<TestimonialAndUser> AllTestimonial()
         {
-            IEnumerable<Testimonial> result = _dbContext.Connection.Query<Testimonial>
+            IEnumerable<TestimonialAndUser> result = _dbContext.Connection.Query<TestimonialAndUser>
                 ("Testimonial_Package.GetAllTestimonials", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }

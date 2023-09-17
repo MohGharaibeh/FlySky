@@ -9,6 +9,7 @@ namespace FlySky.Core.Data
         public decimal? Numberofticket { get; set; }
         public decimal? Useracountid { get; set; }
         public decimal? Flightid { get; set; }
+        public DateTime? Reserveddate { get; set; }
 
         public virtual Flight? Flight { get; set; }
         public virtual Useracount? Useracount { get; set; }

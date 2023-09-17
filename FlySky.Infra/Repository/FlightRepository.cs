@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FlySky.Core.common;
 using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -62,16 +63,16 @@ namespace FlySky.Infra.Repository
             var result = _dbContext.Connection.Execute("flightPackage.deleteFlight", p, commandType: CommandType.StoredProcedure);
 
         }
-        public List<Flight> GetAllFlight()
+        public List<FlightAndAorport> GetAllFlight()
         {
-            IEnumerable<Flight> result = _dbContext.Connection.Query<Flight>("flightPackage.getAllFlight", commandType: CommandType.StoredProcedure);
+            IEnumerable<FlightAndAorport> result = _dbContext.Connection.Query<FlightAndAorport>("flightPackage.getAllFlight", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
-        public Flight GetFlightById(int id)
+        public FlightAndAorport GetFlightById(int id)
         {
             var p = new DynamicParameters();
             p.Add("fid", id, dbType: DbType.Int64, direction: ParameterDirection.Input);
-            var result = _dbContext.Connection.Query<Flight>("flightPackage.getFlightByID", p, commandType: CommandType.StoredProcedure);
+            var result = _dbContext.Connection.Query<FlightAndAorport>("flightPackage.getFlightByID", p, commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
     }

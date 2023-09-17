@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -44,14 +45,15 @@ namespace FlySky.Api.Controllers
         {
             _flightService.DeleteFlight(id);
         }
+       
         [HttpGet]
-        public List<Flight> GetAllFlight()
+        public List<FlightAndAorport> GetAllFlight()
         {
             return _flightService.GetAllFlight();
         }
         [HttpGet]
         [Route("GetByID/{id}")]
-        public Flight GetFlightById(int id)
+        public FlightAndAorport GetFlightById(int id)
         {
             return _flightService.GetFlightById(id);
         }

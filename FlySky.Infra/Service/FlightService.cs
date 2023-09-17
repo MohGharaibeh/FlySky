@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Repository;
 using FlySky.Core.Service;
 using System;
@@ -28,11 +29,11 @@ namespace FlySky.Infra.Service
         {
             _repository.DeleteFlight(id);
         }
-        public List<Flight> GetAllFlight()
+        public List<FlightAndAorport> GetAllFlight()
         {
             return _repository.GetAllFlight();
         }
-        public Flight GetFlightById(int id)
+        public FlightAndAorport GetFlightById(int id)
         {
             return _repository.GetFlightById(id);
         }

@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace FlySky.Core.Service
         void CreateFlight(Flight flight);
         void UpdateFlight(Flight flight);
         void DeleteFlight(int id);
-        List<Flight> GetAllFlight();
-        Flight GetFlightById(int id);
+        List<FlightAndAorport> GetAllFlight();
+        FlightAndAorport GetFlightById(int id);
     }
 }
