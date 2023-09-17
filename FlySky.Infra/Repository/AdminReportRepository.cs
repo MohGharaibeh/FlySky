@@ -27,12 +27,12 @@ namespace FlySky.Infra.Repository
             return reports.ToList();
         }
 
-        public List<Flight> SearchDate(Flight flight)
+        public List<AdminReport> SearchDate(AdminReport admin)
         {
             var p = new DynamicParameters();
-            p.Add("DDate", flight.Departuredate, dbType: DbType.Date, direction: ParameterDirection.Input);
-            p.Add("ARDate", flight.Arrivaldate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            var result = _dbContext.Connection.Query<Flight>("Search.Search_By_Date", p, commandType: CommandType.StoredProcedure);
+            p.Add("DDate", admin.departuredate, dbType: DbType.Date, direction: ParameterDirection.Input);
+            p.Add("ARDate", admin.arrivaldate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<AdminReport>("Search.SearchReport", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }

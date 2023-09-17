@@ -11,6 +11,6 @@ namespace FlySky.Core.Repository
     public interface IAdminReportRepository
     {
         public List<AdminReport> FullReport();
-        public List<Flight> SearchDate(Flight flight);
+        public List<AdminReport> SearchDate(AdminReport admin);
     }
 }
