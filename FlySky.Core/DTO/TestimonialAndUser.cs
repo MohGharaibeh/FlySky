@@ -8,6 +8,7 @@ namespace FlySky.Core.DTO
 {
     public class TestimonialAndUser
     {
+        public decimal Testimonialid { get; set; }
         public string FullName { get; set; }
         public string UserEmail { get; set; }
         public string UserImage { get; set; }

@@ -22,6 +22,7 @@ namespace FlySky.Api.Controllers
             return _testimonial.AllTestimonial();
         }
         [HttpPost]
+        [Route("createTest")]
         public bool CreateTestimonial(Testimonial testimonial)
         {
             return _testimonial.CreateTestimonial(testimonial);
