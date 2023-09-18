@@ -20,6 +20,12 @@ namespace FlySky.Api.Controllers
         {
             return pageService.AllPages();
         }
+        [HttpGet]
+        [Route("GetId")]
+        public Page GetPage()
+        {
+            return pageService.GetPage();
+        }
         [HttpPut]
         public bool UpdatePage([FromBody] Page page)
         {
@@ -31,7 +37,7 @@ namespace FlySky.Api.Controllers
         {
             var file = Request.Form.Files[0];
             var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-            var fullPath = Path.Combine("Images", fileName);
+            var fullPath = Path.Combine("D:\\Angular\\Demo\\src\\assets\\ApiImage", fileName);
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 file.CopyTo(stream);

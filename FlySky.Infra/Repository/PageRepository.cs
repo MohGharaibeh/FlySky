@@ -25,6 +25,11 @@ namespace FlySky.Infra.Repository
             IEnumerable<Page> all = _dbContext.Connection.Query<Page>("Pages_Package.GetAllPages", commandType: CommandType.StoredProcedure);
             return all.ToList();
         }
+        public Page GetPage()
+        {
+            var result = _dbContext.Connection.Query<Page>("Pages_Package.GetById", commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
         public bool UpdatePage(Page page)
         {
             var p = new DynamicParameters();

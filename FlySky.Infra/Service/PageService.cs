@@ -26,5 +26,10 @@ namespace FlySky.Infra.Service
         {
             return _pageRepository.UpdatePage(page);
         }
+
+        public Page GetPage()
+        {
+            return _pageRepository.GetPage();
+        }
     }
 }

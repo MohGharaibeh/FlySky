@@ -11,6 +11,7 @@ namespace FlySky.Core.Repository
     {
         public List<Page> AllPages();
         public bool UpdatePage(Page page);
+        public Page GetPage();
 
     }
 }
