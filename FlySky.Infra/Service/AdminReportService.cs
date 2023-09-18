@@ -33,5 +33,9 @@ namespace FlySky.Infra.Service
         {
             return _adminReportRepository.SearchDateFlight(admin);
         }
+        public List<Chart> FullChart()
+        {
+            return _adminReportRepository.FullChart();
+        }
     }
 }

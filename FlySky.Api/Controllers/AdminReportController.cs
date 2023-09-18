@@ -35,5 +35,13 @@ namespace FlySky.Api.Controllers
         {
             return _adminReportService.SearchDateFlight(admin);
         }
+
+        [HttpGet]
+        [Route("chart")]
+        public List<Chart> FullChart()
+        {
+            return _adminReportService.FullChart();
+        }
+
     }
 }

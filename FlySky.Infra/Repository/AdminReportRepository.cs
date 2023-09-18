@@ -44,5 +44,10 @@ namespace FlySky.Infra.Repository
             var result = _dbContext.Connection.Query<Flight>("Search.Search_By_Date", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<Chart> FullChart()
+        {
+            IEnumerable<Chart> result = _dbContext.Connection.Query<Chart>("reportpackage.chart", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }
