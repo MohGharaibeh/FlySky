@@ -13,7 +13,7 @@ namespace FlySky.Core.Repository
         public List<AdminReport> FullReport();
         public List<AdminReport> SearchDate(AdminReport admin);
 
-        public List<Flight> SearchDateFlight(Flight admin);
+        public List<FlightAndAorport> SearchDateFlight(FlightAndAorport admin);
         public List<Chart> FullChart();
     }
 }

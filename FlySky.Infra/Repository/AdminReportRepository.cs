@@ -36,12 +36,12 @@ namespace FlySky.Infra.Repository
             return result.ToList();
         }
 
-        public List<Flight> SearchDateFlight(Flight admin)
+        public List<FlightAndAorport> SearchDateFlight(FlightAndAorport admin)
         {
             var p = new DynamicParameters();
             p.Add("DDate", admin.Departuredate, dbType: DbType.Date, direction: ParameterDirection.Input);
             p.Add("ARDate", admin.Arrivaldate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            var result = _dbContext.Connection.Query<Flight>("Search.Search_By_Date", p, commandType: CommandType.StoredProcedure);
+            var result = _dbContext.Connection.Query<FlightAndAorport>("Search.Search_By_Date", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
         public List<Chart> FullChart()
