@@ -40,5 +40,10 @@ namespace FlySky.Infra.Repository
             IEnumerable<About> result = _context.Connection.Query<About>("aboutpackage.getAllabout", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public About GetById()
+        {
+            var result = _context.Connection.Query<About>("aboutpackage.GetById", commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
     }
 }

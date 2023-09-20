@@ -11,5 +11,6 @@ namespace FlySky.Core.Repository
     {
         public bool UpdateAbout(About about);
         public List<About> GetAll();
+        public About GetById();
     }
 }

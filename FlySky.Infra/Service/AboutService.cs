@@ -26,5 +26,9 @@ namespace FlySky.Infra.Service
         {
             return _aboutRepository.GetAll();
         }
+        public About GetById()
+        {
+            return _aboutRepository.GetById();
+        }
     }
 }
