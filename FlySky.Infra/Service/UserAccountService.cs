@@ -56,7 +56,8 @@ namespace FlySky.Infra.Service
                 var clims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, result.Email.ToString()),
-                new Claim(ClaimTypes.Role, result.Roleid.ToString())
+                    new Claim(ClaimTypes.Role, result.Roleid.ToString()),
+                    new Claim("Useracountid", result.Useracountid.ToString())
                 };
 
                 var option = new JwtSecurityToken(claims: clims, expires: DateTime.Now.AddHours(1), signingCredentials: cred);
