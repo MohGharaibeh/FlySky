@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FlySky.Core.common;
 using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -32,10 +33,10 @@ namespace FlySky.Infra.Repository
             return result;
         }
 
-        public string maxReserveFlight()
+        public MaxReservedStatistic maxReserveFlight()
         {
-            string result = _dbContext.Connection.QueryFirstOrDefault<string>("statistic.maxReserveFlight", commandType: CommandType.StoredProcedure);
-            return result;
+            var result = _dbContext.Connection.Query<MaxReservedStatistic>("statistic.maxReserveFlight", commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
         }
     }
 }

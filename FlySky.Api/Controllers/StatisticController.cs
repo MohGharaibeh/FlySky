@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Service;
 using FlySky.Infra.Service;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +32,7 @@ namespace FlySky.Api.Controllers
         }
         [HttpGet]
         [Route("maxReserveFlight")]
-        public string maxReserveFlight()
+        public MaxReservedStatistic maxReserveFlight()
         {
             return statisticService.maxReserveFlight();
         }

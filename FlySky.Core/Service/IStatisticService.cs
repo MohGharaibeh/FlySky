@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace FlySky.Core.Service
     {
         int GetAllAirport();
         int GetAllviewRegisterUsers();
-        string maxReserveFlight();
+        MaxReservedStatistic maxReserveFlight();
 
     }
 }

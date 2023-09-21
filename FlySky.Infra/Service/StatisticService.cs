@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Repository;
 using FlySky.Core.Service;
 using System;
@@ -26,7 +27,7 @@ namespace FlySky.Infra.Service
             return service.GetAllviewRegisterUsers();
         }
 
-        public string maxReserveFlight()
+        public MaxReservedStatistic maxReserveFlight()
         {
             return service.maxReserveFlight();
         }
