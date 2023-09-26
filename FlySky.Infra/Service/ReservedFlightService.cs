@@ -22,9 +22,9 @@ namespace FlySky.Infra.Service
         {
             return _reservedFlightRepository.AllReserved();
         }
-        public bool CreateReserved(Reservedflight reservedflight)
+        public async Task<bool> CreateReserved(Reservedflight reservedflight)
         {
-            return _reservedFlightRepository.CreateReserved(reservedflight);
+            return await _reservedFlightRepository.CreateReserved(reservedflight);
         }
         public bool UpdateReserved(Reservedflight reservedflight)
         {

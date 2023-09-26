@@ -26,7 +26,7 @@ namespace FlySky.Api.Controllers
         {
             var file = Request.Form.Files[0];
             var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-            var fullPath = Path.Combine("Images", fileName);
+            var fullPath = Path.Combine("D:\\Angular\\Demo\\src\\assets\\ApiImage", fileName);
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 file.CopyTo(stream);
@@ -40,7 +40,7 @@ namespace FlySky.Api.Controllers
         {
             _flightService.UpdateFlight(flight);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public void DeleteFlight(int id)
         {
             _flightService.DeleteFlight(id);

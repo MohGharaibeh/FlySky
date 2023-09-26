@@ -8,13 +8,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlySky.Infra.Invoice;
 
 namespace FlySky.Infra.Repository
 {
     public class ReservedFlightRepository : IReservedFlightRepository
     {
+        public BankData? bank = new BankData();
+        Email email = new Email();
+        UserAccountReposetory ur = new UserAccountReposetory();
         private readonly IDbContext _dbContext;
-
+        public ReservedFlightRepository()
+        {
+            
+        }
         public ReservedFlightRepository(IDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -26,8 +33,24 @@ namespace FlySky.Infra.Repository
                 ("RESERVEDFLIGHTpackage.getAllRESERVEDFLIGHT", commandType: CommandType.StoredProcedure);
             return all.ToList();
         }
-        public bool CreateReserved(Reservedflight reservedflight)
+        private void FillInvoice (Reservedflight reservedflight, BankData bank)
         {
+            
+            Useracount all= ur.UserById((int)reservedflight.Useracountid);
+            string emails = all.Email;
+            bank.ReservedDate = reservedflight.Reserveddate.Value;
+            //bank.DepartureDate = reservedflight.Flight.Departuredate.Value;
+            //bank.ArrivalDate = reservedflight.Flight.Arrivaldate.Value;
+            bank.UserEmail = emails;
+            var r = reservedflight.Flight.Price;
+            var x = reservedflight.Numberofticket.Value;
+            bank.TotalPrice = (decimal)r * x;
+        }
+        public async Task<bool> CreateReserved(Reservedflight reservedflight)
+        {
+            FillInvoice (reservedflight, bank);
+            Task.Run(()=> email.GenerateFlightBookingPdf()) ;
+
             var p = new DynamicParameters();
             p.Add("numTicket", reservedflight.Numberofticket, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("userid", reservedflight.Useracountid, dbType: DbType.Int32, direction: ParameterDirection.Input);

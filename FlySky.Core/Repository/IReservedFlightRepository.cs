@@ -10,7 +10,7 @@ namespace FlySky.Core.Repository
     public interface IReservedFlightRepository
     {
         public List<Reservedflight> AllReserved();
-        public bool CreateReserved(Reservedflight reservedflight);
+        public Task<bool> CreateReserved(Reservedflight reservedflight);
         public bool UpdateReserved(Reservedflight reservedflight);
         public bool DeleteReserved(int id);
         public Reservedflight ReservedById(int id);

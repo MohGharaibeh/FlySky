@@ -30,11 +30,10 @@ namespace FlySky.Infra.Repository
         public void UpdateBank(Virtualbank bank)
         {
             var p = new DynamicParameters();
-            p.Add("cID", bank.Virtualbankid, dbType: DbType.Int64, direction: ParameterDirection.Input);
-            p.Add("blnc", bank.Balance, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            p.Add("blnc", bank.Balance, dbType: DbType.Decimal, direction: ParameterDirection.Input);
             p.Add("ban", bank.Iban, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("cvnum", bank.Cvv, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("xdate", bank.Exdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("xdate", bank.Exdate, dbType: DbType.String, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Execute("BankPackage.UpdateBank", p, commandType: CommandType.StoredProcedure);
 
         }

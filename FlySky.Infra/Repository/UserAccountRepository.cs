@@ -13,7 +13,10 @@ namespace FlySky.Infra.Repository
     public class UserAccountReposetory : IUserAccountRepository
     {
         private readonly IDbContext _dbContext;
-
+        public UserAccountReposetory()
+        {
+            
+        }
         public UserAccountReposetory(IDbContext dbContext)
         {
             this._dbContext = dbContext;

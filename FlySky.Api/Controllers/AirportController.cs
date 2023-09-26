@@ -25,7 +25,7 @@ namespace FlySky.Api.Controllers
         {
             airportService.UpdateAirport(airport);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public void DeleteAirport(int id)
         {
             airportService.DeleteAirport(id);

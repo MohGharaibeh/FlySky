@@ -21,9 +21,9 @@ namespace FlySky.Api.Controllers
             return _reservedFlightService.AllReserved();
         }
         [HttpPost]
-        public bool CreateReserved(Reservedflight reservedflight)
+        public async Task<bool> CreateReserved(Reservedflight reservedflight)
         {
-            return _reservedFlightService.CreateReserved(reservedflight);
+            return await _reservedFlightService.CreateReserved(reservedflight);
         }
         [HttpPut]
         public bool UpdateReserved(Reservedflight reservedflight)
