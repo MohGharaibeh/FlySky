@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlySky.Infra.Invoice;
+using FlySky.Core.DTO;
 
 namespace FlySky.Infra.Repository
 {
@@ -33,30 +34,33 @@ namespace FlySky.Infra.Repository
                 ("RESERVEDFLIGHTpackage.getAllRESERVEDFLIGHT", commandType: CommandType.StoredProcedure);
             return all.ToList();
         }
-        private void FillInvoice (Reservedflight reservedflight, BankData bank)
+        private void FillInvoice ( BankData bank)
         {
             
-            Useracount all= ur.UserById((int)reservedflight.Useracountid);
-            string emails = all.Email;
-            bank.ReservedDate = reservedflight.Reserveddate.Value;
+          //  Useracount all= ur.UserById((int)reservedflight.Useracountid);
+          //  string emails = all.Email;
+          //  bank.ReservedDate = reservedflight.Reserveddate.Value;
             //bank.DepartureDate = reservedflight.Flight.Departuredate.Value;
             //bank.ArrivalDate = reservedflight.Flight.Arrivaldate.Value;
-            bank.UserEmail = emails;
-            var r = reservedflight.Flight.Price;
-            var x = reservedflight.Numberofticket.Value;
-            bank.TotalPrice = (decimal)r * x;
+          //  bank.UserEmail = emails;
+         //   var r = reservedflight.Flight.Price;
+          //  var x = reservedflight.Numberofticket.Value;
+          //  bank.TotalPrice = (decimal)r * x;
+          email.GenerateFlightBookingPdf(bank);
         }
-        public async Task<bool> CreateReserved(Reservedflight reservedflight)
+        public async Task<bool> CreateReserved(RequestData request)
         {
-            FillInvoice (reservedflight, bank);
-            Task.Run(()=> email.GenerateFlightBookingPdf()) ;
+            
+           // Task.Run(()=> email.GenerateFlightBookingPdf()) ;
 
             var p = new DynamicParameters();
-            p.Add("numTicket", reservedflight.Numberofticket, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("userid", reservedflight.Useracountid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("fid", reservedflight.Flightid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("resdate", reservedflight.Reserveddate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("numTicket", request.Reservedflight.Numberofticket, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("userid", request.Reservedflight.Useracountid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("fid", request.Reservedflight.Flightid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("resdate", request.Reservedflight.Reserveddate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Execute("RESERVEDFLIGHTpackage.createRESERVEDFLIGHT", p, commandType: CommandType.StoredProcedure);
+            //  FillInvoice(request.Data);
+            email.GenerateFlightBookingPdf(request.Data);
             return result < 0;
 
         }

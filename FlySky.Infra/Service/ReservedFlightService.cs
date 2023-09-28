@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlySky.Infra.Invoice;
+using FlySky.Core.DTO;
 
 namespace FlySky.Infra.Service
 {
@@ -22,9 +24,9 @@ namespace FlySky.Infra.Service
         {
             return _reservedFlightRepository.AllReserved();
         }
-        public async Task<bool> CreateReserved(Reservedflight reservedflight)
+        public async Task<bool> CreateReserved(RequestData request)
         {
-            return await _reservedFlightRepository.CreateReserved(reservedflight);
+            return await _reservedFlightRepository.CreateReserved(request);
         }
         public bool UpdateReserved(Reservedflight reservedflight)
         {

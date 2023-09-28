@@ -1,5 +1,7 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Service;
+using FlySky.Infra.Invoice;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +23,9 @@ namespace FlySky.Api.Controllers
             return _reservedFlightService.AllReserved();
         }
         [HttpPost]
-        public async Task<bool> CreateReserved(Reservedflight reservedflight)
+        public async Task<bool> CreateReserved(RequestData request)
         {
-            return await _reservedFlightService.CreateReserved(reservedflight);
+            return await _reservedFlightService.CreateReserved(request);
         }
         [HttpPut]
         public bool UpdateReserved(Reservedflight reservedflight)
