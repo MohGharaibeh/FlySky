@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlySky.Core.DTO;
+
 namespace FlySky.Infra.Repository
 {
     public class UserAccountReposetory : IUserAccountRepository
@@ -98,5 +100,23 @@ namespace FlySky.Infra.Repository
             var result = _dbContext.Connection.Query<Flight>("userSearch_package.searchFromToCountry", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+
+        public List<ReservedFlightByUser> ReservedUser(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("uid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<ReservedFlightByUser> result = _dbContext.Connection.Query<ReservedFlightByUser>
+                ("UserAcountPackage.ReservedFlightByUser", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<TrackingMap> TrackInMap(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("uid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<TrackingMap> result = _dbContext.Connection.Query<TrackingMap>
+                ("UserAcountPackage.TrackingMap", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
     }
 }

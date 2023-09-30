@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,8 @@ namespace FlySky.Core.Repository
         public Useracount Login(Useracount useracount);
         public List<Flight> SearchByDate(Flight flight);
         public List<Flight> SearchByCountry(Flight flight);
+        public List<ReservedFlightByUser> ReservedUser(int id);
+        public List<TrackingMap> TrackInMap(int id);
+
     }
 }

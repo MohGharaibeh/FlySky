@@ -1,4 +1,5 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Repository;
 using FlySky.Core.Service;
 using Microsoft.IdentityModel.Tokens;
@@ -58,7 +59,8 @@ namespace FlySky.Infra.Service
                     new Claim(ClaimTypes.Name, result.Email.ToString()),
                     new Claim(ClaimTypes.Role, result.Roleid.ToString()),
                     new Claim("Useracountid", result.Useracountid.ToString()),
-                    new Claim("email", result.Email.ToString())
+                    new Claim("email", result.Email.ToString()),
+                    new Claim("fname", result.Fname.ToString())
                 };
 
                 var option = new JwtSecurityToken(claims: clims, expires: DateTime.Now.AddHours(1), signingCredentials: cred);
@@ -75,5 +77,14 @@ namespace FlySky.Infra.Service
         {
             return _userAccountRepository.SearchByCountry(flight);
         }
+        public List<ReservedFlightByUser> ReservedUser(int id)
+        {
+            return _userAccountRepository.ReservedUser(id);
+        }
+        public List<TrackingMap> TrackInMap(int id)
+        {
+            return _userAccountRepository.TrackInMap(id);
+        }
+
     }
 }

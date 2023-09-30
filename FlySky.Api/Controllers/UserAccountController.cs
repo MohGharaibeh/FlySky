@@ -1,8 +1,12 @@
 ﻿using FlySky.Core.Data;
+using FlySky.Core.DTO;
 using FlySky.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace FlySky.Api.Controllers
 {
@@ -88,6 +92,49 @@ namespace FlySky.Api.Controllers
         public List<Flight> SearchByCountry([FromBody] Flight flight)
         {
             return _userAccountService.SearchByCountry(flight);
+        }
+
+        [Route("getres/{id}")]
+        [HttpGet]
+        public List<ReservedFlightByUser> ReservedUser(int id)
+        {
+            return _userAccountService.ReservedUser(id);
+        }
+
+        [Route("track/{id}")]
+        [HttpGet]
+        public List<TrackingMap> TrackInMap(int id)
+        {
+            return _userAccountService.TrackInMap(id);
+        }
+
+        [HttpPost]
+        [Route("chat")]
+        public async Task<IActionResult> chatAsync([FromBody] ChatRequest requests)
+        {
+            if (requests != null && !string.IsNullOrWhiteSpace(requests.Question))
+            {
+                var client = new HttpClient();
+
+                var requestBody = new { question = requests.Question };
+                var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+
+                var request = new HttpRequestMessage(HttpMethod.Post, "http://127.0.0.1:4000/chatbot");
+                request.Content = content;
+
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                var responseObject = JsonConvert.DeserializeObject<JObject>(jsonResponse);
+
+                string answer = responseObject["response_text"]?.ToString();
+
+                return Ok(new { answer });
+            }
+
+            return BadRequest(new { answer = "Please provide a valid question." });
         }
     }
 }
