@@ -25,16 +25,17 @@ namespace FlySky.Api.Controllers
         }
         [Route("uploadImage")]
         [HttpPost]
-        public Useracount UploadImage()
+        public About UploadImage()
         {
             var file = Request.Form.Files[0];
             var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-            var fullPath = Path.Combine("D:\\Angular\\Demo\\src\\assets\\ApiImage", fileName);
+            var fullPath = Path.Combine("C:\\Users\\DELL\\source\\repos\\FlySkyFE\\src\\assets\\ApiImage", fileName);
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
-            Useracount user = new Useracount();
+            // Useracount user = new Useracount();
+            About user = new About();
             user.Image = fileName;
             return user;
         }

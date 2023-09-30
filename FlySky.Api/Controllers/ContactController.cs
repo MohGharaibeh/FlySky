@@ -21,13 +21,13 @@ namespace FlySky.Api.Controllers
            
             contactService.CreateContact(contact);
         }
-        [Route("uploadImage")]
+        /*[Route("uploadImage")]
         [HttpPost]
         public Useracount UploadImage()
         {
             var file = Request.Form.Files[0];
             var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-            var fullPath = Path.Combine("Images", fileName);
+            var fullPath = Path.Combine("C:\\Users\\DELL\\source\\repos\\FlySkyFE\\src\\assets\\ApiImage", fileName);
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 file.CopyTo(stream);
@@ -35,7 +35,7 @@ namespace FlySky.Api.Controllers
             Useracount user = new Useracount();
             user.Image = fileName;
             return user;
-        }
+        }*/
         [HttpPut]
         public void UpdateContact(Contact contact)
         {
