@@ -21,7 +21,10 @@ namespace FlySky.Infra.Service
         {
             _userAccountRepository = userAccountRepository;
         }
-
+        public Useracount ChickUser(string email)
+        {
+            return _userAccountRepository.ChickUser(email);
+        }
         public List<Useracount> AllUsers()
         {
             return _userAccountRepository.AllUsers();

@@ -20,6 +20,7 @@ namespace FlySky.Core.Service
         public List<Flight> SearchByCountry(Flight flight);
         public List<ReservedFlightByUser> ReservedUser(int id);
         public List<TrackingMap> TrackInMap(int id);
+        public Useracount ChickUser(string email);
 
     }
 }

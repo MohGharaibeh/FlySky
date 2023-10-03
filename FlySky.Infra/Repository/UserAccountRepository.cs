@@ -31,6 +31,14 @@ namespace FlySky.Infra.Repository
             _dbContext.Connection.Close();
             return result.ToList();
         }
+
+        public Useracount ChickUser(string email)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_email", email,dbType: DbType.String , direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Useracount>("UserAcountPackage.CheckExistEmail", p, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
         public bool CreateUser(Useracount useracount)
         {
             var p = new DynamicParameters();
