@@ -24,7 +24,7 @@ namespace FlySky.Infra.Repository
             p.Add("blnc", bank.Balance, dbType: DbType.Int64, direction: ParameterDirection.Input);
             p.Add("ban", bank.Iban, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("cvnum", bank.Cvv, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("xdate", bank.Exdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("xdate", bank.Exdate, dbType: DbType.String, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Execute("BankPackage.CreateBank", p, commandType: CommandType.StoredProcedure);
         }
         public void UpdateBank(Virtualbank bank)
@@ -55,6 +55,27 @@ namespace FlySky.Infra.Repository
             var p = new DynamicParameters();
             p.Add("CID", id, dbType: DbType.Int64, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Query<Virtualbank>("BankPackage.GETBYID", p, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
+        public Virtualbank CheckBank(Virtualbank bank)
+        {
+            var p = new DynamicParameters();
+            p.Add("ban", bank.Iban, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("cvnum", bank.Cvv, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("xdate", bank.Exdate, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Virtualbank>("BankPackage.CheckBank", p, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
+        public Virtualbank CheckBalance(Virtualbank bank)
+        {
+            var p = new DynamicParameters();
+            p.Add("blnc", bank.Balance, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("ban", bank.Iban, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("cvnum", bank.Cvv, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("xdate", bank.Exdate, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Virtualbank>("BankPackage.CheckBalance", p, commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
     }

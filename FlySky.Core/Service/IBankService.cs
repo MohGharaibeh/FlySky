@@ -14,5 +14,7 @@ namespace FlySky.Core.Service
         void DeleteBank(int id);
         List<Virtualbank> GetAllBank();
         Virtualbank GetBankById(int id);
+        Virtualbank CheckBank(Virtualbank bank);
+        Virtualbank CheckBalance(Virtualbank bank);
     }
 }

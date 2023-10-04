@@ -36,5 +36,15 @@ namespace FlySky.Infra.Service
         {
            return _bankRepository.GetBankById(id);
         }
+
+        public Virtualbank CheckBank(Virtualbank bank)
+        {
+            return _bankRepository.CheckBank(bank);
+        }
+        public Virtualbank CheckBalance(Virtualbank bank)
+        {
+            return _bankRepository.CheckBalance(bank);
+        }
+
     }
 }

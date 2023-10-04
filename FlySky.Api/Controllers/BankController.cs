@@ -40,5 +40,19 @@ namespace FlySky.Api.Controllers
         {
             return bankService.GetBankById(id);
         }
+
+        [HttpPost]
+        [Route("checkBank")]
+        public Virtualbank CheckBank([FromBody]Virtualbank bank)
+        {
+            return bankService.CheckBank(bank);
+        }
+
+        [HttpPost]
+        [Route("checkBalance")]
+        public Virtualbank CheckBalance([FromBody]Virtualbank bank)
+        {
+            return bankService.CheckBalance(bank);
+        }
     }
 }
