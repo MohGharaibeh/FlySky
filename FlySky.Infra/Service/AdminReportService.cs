@@ -37,5 +37,10 @@ namespace FlySky.Infra.Service
         {
             return _adminReportRepository.FullChart();
         }
+
+        public Profits AllProfit()
+        {
+            return _adminReportRepository.AllProfit();
+        }
     }
 }

@@ -43,5 +43,12 @@ namespace FlySky.Api.Controllers
             return _adminReportService.FullChart();
         }
 
+        [HttpGet]
+        [Route("profit")]
+        public Profits AllProfit()
+        {
+            return _adminReportService.AllProfit();
+        }
+
     }
 }

@@ -49,5 +49,12 @@ namespace FlySky.Infra.Repository
             IEnumerable<Chart> result = _dbContext.Connection.Query<Chart>("reportpackage.chart", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+
+        public Profits AllProfit()
+        {
+            var result = _dbContext.Connection.Query<Profits>("reportpackage.Profit",
+                commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
     }
 }

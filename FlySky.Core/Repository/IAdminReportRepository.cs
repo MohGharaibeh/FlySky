@@ -15,5 +15,6 @@ namespace FlySky.Core.Repository
 
         public List<FlightAndAorport> SearchDateFlight(FlightAndAorport admin);
         public List<Chart> FullChart();
+        public Profits AllProfit();
     }
 }
