@@ -9,6 +9,6 @@ namespace FlySky.Core.Data
         public decimal? Balance { get; set; }
         public string? Iban { get; set; }
         public decimal? Cvv { get; set; }
-        public DateTime? Exdate { get; set; }
+        public string? Exdate { get; set; }
     }
 }

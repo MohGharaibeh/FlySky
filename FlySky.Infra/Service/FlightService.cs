@@ -37,5 +37,9 @@ namespace FlySky.Infra.Service
         {
             return _repository.GetFlightById(id);
         }
+        public void UpdateCapacity(Flight flight)
+        {
+            _repository.UpdateCapacity(flight);
+        }
     }
 }

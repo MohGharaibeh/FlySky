@@ -57,5 +57,12 @@ namespace FlySky.Api.Controllers
         {
             return _flightService.GetFlightById(id);
         }
+
+        [HttpPut]
+        [Route("updateCapacity")]
+        public void UpdateCapacity(Flight flight)
+        {
+            _flightService.UpdateCapacity(flight);
+        }
     }
 }

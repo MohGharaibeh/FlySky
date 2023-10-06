@@ -75,5 +75,14 @@ namespace FlySky.Infra.Repository
             var result = _dbContext.Connection.Query<FlightAndAorport>("flightPackage.getFlightByID", p, commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
+
+        public void UpdateCapacity(Flight flight)
+        {
+            var p = new DynamicParameters();
+            p.Add("fid", flight.Flightid, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            p.Add("fcapacity", flight.Capacity, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Execute("flightPackage.udpateCapacity", p, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

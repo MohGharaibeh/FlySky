@@ -429,7 +429,8 @@ namespace FlySky.Core.Data
                     .HasColumnName("CVV");
 
                 entity.Property(e => e.Exdate)
-                    .HasColumnType("DATE")
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
                     .HasColumnName("EXDATE");
 
                 entity.Property(e => e.Iban)

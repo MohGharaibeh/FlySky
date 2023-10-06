@@ -15,6 +15,7 @@ namespace FlySky.Core.Repository
         void DeleteFlight(int id);
         List<FlightAndAorport> GetAllFlight();
         FlightAndAorport GetFlightById(int id);
+        void UpdateCapacity(Flight flight);
 
     }
 }

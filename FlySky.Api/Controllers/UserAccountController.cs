@@ -3,8 +3,8 @@ using FlySky.Core.DTO;
 using FlySky.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+/*using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;*/
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -108,7 +108,13 @@ namespace FlySky.Api.Controllers
             return _userAccountService.TrackInMap(id);
         }
 
-        [HttpPost]
+        [Route("chickUser/{email}")]
+        [HttpGet]
+        public Useracount ChickUser(string email)
+        {
+            return _userAccountService.ChickUser(email);
+        }
+       /* [HttpPost]
         [Route("chat")]
         public async Task<IActionResult> chatAsync([FromBody] ChatRequest requests)
         {
@@ -135,6 +141,6 @@ namespace FlySky.Api.Controllers
             }
 
             return BadRequest(new { answer = "Please provide a valid question." });
-        }
+        }*/
     }
 }
